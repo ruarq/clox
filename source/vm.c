@@ -48,6 +48,26 @@ InterpretResult vm_run()
 			}
 			break;
 
+			case OP_ADD:
+				vm_stack_push(vm_stack_pop() + vm_stack_pop());
+				break;
+
+			case OP_SUB:
+				vm_stack_push(-vm_stack_pop() + vm_stack_pop());
+				break;
+
+			case OP_MUL:
+				vm_stack_push(vm_stack_pop() * vm_stack_pop());
+				break;
+
+			case OP_DIV:
+			{
+				const Value b = vm_stack_pop();
+				const Value a = vm_stack_pop();
+				vm_stack_push(a / b);
+			}
+			break;
+
 			case OP_NEGATE:
 				vm_stack_push(-vm_stack_pop());
 				break;

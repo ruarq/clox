@@ -12,9 +12,14 @@ int main()
 	Chunk chunk;
 	chunk_init(&chunk);
 
-	const size_t index = chunk_write_constant(&chunk, 12.5);
+	const size_t indexA = chunk_write_constant(&chunk, 12.5);
+	const size_t indexB = chunk_write_constant(&chunk, 12.5);
+
 	chunk_write(&chunk, OP_CONSTANT, 0);
-	chunk_write(&chunk, index, 0);
+	chunk_write(&chunk, indexA, 0);
+	chunk_write(&chunk, OP_CONSTANT, 0);
+	chunk_write(&chunk, indexB, 0);
+	chunk_write(&chunk, OP_ADD, 1);
 	chunk_write(&chunk, OP_NEGATE, 1);
 	chunk_write(&chunk, OP_RETURN, 1);
 

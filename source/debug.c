@@ -1,8 +1,9 @@
 #include "debug.h"
 
-void instruction_simple(const char *name)
+size_t instruction_simple(const char *name, const size_t index)
 {
 	printf("%-16s\n", name);
+	return index + 1;
 }
 
 size_t instruction_constant(const char *name, const Chunk *chunk, const size_t index)
@@ -44,13 +45,23 @@ size_t debug_instruction(const Chunk *chunk, const size_t index)
 		case OP_CONSTANT:
 			return instruction_constant("OP_CONSTANT", chunk, index);
 
+		case OP_ADD:
+			return instruction_simple("OP_ADD", index);
+		
+		case OP_SUB:
+			return instruction_simple("OP_SUB", index);
+
+		case OP_MUL:
+			return instruction_simple("OP_MUL", index);
+
+		case OP_DIV:
+			return instruction_simple("OP_DIV", index);
+
 		case OP_NEGATE:
-			instruction_simple("OP_NEGATE");
-			return index + 1;
+			return instruction_simple("OP_NEGATE", index);
 
 		case OP_RETURN:
-			instruction_simple("OP_RETURN");
-			return index + 1;
+			return instruction_simple("OP_RETURN", index);
 
 		default:
 			printf("unknown OpCode %d", instruction);
