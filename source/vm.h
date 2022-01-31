@@ -2,10 +2,17 @@
 #define CLOX_VM_H
 
 #include "chunk.h"
+#include "debug.h"
+
+#define VM_STACK_MAX 1 << 8
 
 typedef struct
 {
 	Chunk *chunk;
+	uint8_t *ip;
+
+	Value stack[VM_STACK_MAX];
+	Value *stack_top;
 } VM;
 
 typedef enum
@@ -16,7 +23,13 @@ typedef enum
 } InterpretResult;
 
 void vm_init();
-InterpretResult vm_interpret(Chunk *chunk);
 void vm_free();
+
+InterpretResult vm_interpret(Chunk *chunk);
+InterpretResult vm_run();
+
+void vm_reset_stack();
+void vm_stack_push(const Value value);
+Value vm_stack_pop();
 
 #endif
