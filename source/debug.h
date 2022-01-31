@@ -4,8 +4,9 @@
 #include <stdio.h>
 
 #include "chunk.h"
+#include "value.h"
 
-void debug_chunk(Chunk *chunk, const char *name);
+void debug_chunk(const Chunk *chunk, const char *name);
 
 /**
  * @brief debug a instruction located in a chunk
@@ -13,6 +14,6 @@ void debug_chunk(Chunk *chunk, const char *name);
  * @param index the index of the instruction
  * @return index of the next instruction
  */
-size_t debug_instruction(Chunk *chunk, const size_t index);
+size_t debug_instruction(const Chunk *chunk, const size_t index);
 
 #endif

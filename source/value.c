@@ -1,5 +1,10 @@
 #include "value.h"
 
+void value_print(const Value value)
+{
+	printf("%g", value);
+}
+
 void value_array_init(ValueArray *va)
 {
 	va->size = 0;

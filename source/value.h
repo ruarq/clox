@@ -2,10 +2,13 @@
 #define CLOX_VALUE_H
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "common.h"
 
 typedef double Value;
+
+void value_print(const Value value);
 
 typedef struct
 {

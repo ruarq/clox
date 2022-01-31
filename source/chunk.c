@@ -20,9 +20,10 @@ void chunk_write(Chunk *chunk, const uint8_t byte)
 	chunk->code[chunk->size++] = byte;
 }
 
-void chunk_write_value(Chunk *chunk, const Value value)
+size_t chunk_write_constant(Chunk *chunk, const Value constant)
 {
-	value_array_write(&chunk->constants, value);
+	value_array_write(&chunk->constants, constant);
+	return chunk->constants.size - 1;
 }
 
 void chunk_realloc(Chunk *chunk, const size_t capacity)
