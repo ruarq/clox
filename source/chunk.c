@@ -1,6 +1,6 @@
 #include "chunk.h"
 
-void init_chunk(Chunk *chunk)
+void chunk_init(Chunk *chunk)
 {
 	chunk->count = 0;
 	chunk->capacity = 0;
