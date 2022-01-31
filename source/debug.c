@@ -28,6 +28,16 @@ void debug_chunk(const Chunk *chunk, const char *name)
 size_t debug_instruction(const Chunk *chunk, const size_t index)
 {
 	printf("%04ld ", index);
+
+	if (index > 0 && chunk->lines[index] == chunk->lines[index - 1])
+	{
+		printf("   | ");
+	}
+	else
+	{
+		printf("%4ld ", chunk->lines[index]);
+	}
+
 	const uint8_t instruction = chunk->code[index];
 	switch (instruction)
 	{
