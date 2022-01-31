@@ -17,12 +17,13 @@ typedef struct
 	size_t size;
 	size_t capacity;
 	uint8_t *code;
+	size_t *lines;
 
 	ValueArray constants;
 } Chunk;
 
 void chunk_init(Chunk *chunk);
-void chunk_write(Chunk *chunk, const uint8_t byte);
+void chunk_write(Chunk *chunk, const uint8_t byte, const size_t line);
 
 /**
  * @brief write a constant to the chunk
