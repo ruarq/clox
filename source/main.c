@@ -18,7 +18,7 @@ int main()
 
 	chunk_write(&chunk, OP_RETURN, 1);
 
-	debug_chunk(&chunk, "test");
+	vm_interpret(&chunk);
 
 	chunk_free(&chunk);
 

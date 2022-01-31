@@ -50,7 +50,7 @@ InterpretResult vm_run()
 
 			case OP_RETURN:
 				value_print(vm_stack_pop());
-				puts("\n");
+				printf("\n");
 				return INTERPRET_OK;
 		}
 	}
