@@ -20,5 +20,6 @@ typedef struct
 void chunk_init(Chunk *chunk);
 void chunk_write(Chunk *chunk, const uint8_t byte);
 void chunk_realloc(Chunk *chunk, const size_t capacity);
+void chunk_free(Chunk *chunk);
 
 #endif
