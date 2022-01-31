@@ -1,11 +1,14 @@
 #include <stdio.h>
 
 #include "common.h"
+#include "vm.h"
 #include "chunk.h"
 #include "debug.h"
 
 int main()
 {
+	vm_init();
+
 	Chunk chunk;
 	chunk_init(&chunk);
 
@@ -19,5 +22,6 @@ int main()
 
 	chunk_free(&chunk);
 
+	vm_free();
 	return 0;
 }
