@@ -55,11 +55,16 @@ void run_file(const char *filename)
 		
 		case INTERPRET_RUNTIME_ERROR:
 			exit(70);
+
+		default:
+			break;
 	}
 }
 
 int main(int argc, char **argv)
 {
+	vm_init();
+
 	switch (argc)
 	{
 		case 1:
@@ -74,6 +79,8 @@ int main(int argc, char **argv)
 			printf("usage: %s [file]\n", argv[0]);
 			return 1;
 	}
+
+	vm_free();
 	
 	return 0;
 }

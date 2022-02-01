@@ -14,13 +14,22 @@ void vm_free()
 
 InterpretResult vm_interpret(const char *source)
 {
-	// vm.chunk = chunk;
-	// vm.ip = chunk->code;
+	Chunk chunk;
+	chunk_init(&chunk);
 
-	// return vm_run();
+	if (!compile(source, &chunk))
+	{
+		chunk_free(&chunk);
+		return INTERPRET_COMPILE_ERROR;
+	}
 
-	compile(source);
-	return INTERPRET_OK;
+	vm.chunk = &chunk;
+	vm.ip = chunk.code;
+
+	InterpretResult result = vm_run();
+
+	chunk_free(&chunk);
+	return result;
 }
 
 InterpretResult vm_run()

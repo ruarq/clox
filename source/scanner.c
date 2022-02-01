@@ -44,7 +44,7 @@ Token scanner_next()
 		case ';':	return scanner_create_token(TOKEN_SEMICOLON);
 		case '+':	return scanner_create_token(TOKEN_PLUS);
 		case '-':	return scanner_create_token(TOKEN_MINUS);
-		case '*':	return scanner_create_token(TOKEN_ASTERIK);
+		case '*':	return scanner_create_token(TOKEN_ASTERISK);
 		case '/':	return scanner_create_token(TOKEN_SLASH);
 
 		case '!':
@@ -129,7 +129,7 @@ Token scanner_read_number()
 		}
 	}
 
-	return scanner_create_token(scanner_determine_ident_type());
+	return scanner_create_token(TOKEN_NUMBER);
 }
 
 TokenType scanner_determine_ident_type()
@@ -192,12 +192,12 @@ TokenType scanner_check_keyword(const size_t start, const char *match, const Tok
 
 Token scanner_read_ident()
 {
-	while (is_alpha(scanner_current()) && is_digit(scanner_current()))
+	while (is_alpha(scanner_current()) || is_digit(scanner_current()))
 	{
 		scanner_advance();
 	}
 
-	return scanner_create_token(TOKEN_IDENT);
+	return scanner_create_token(scanner_determine_ident_type());
 }
 
 char scanner_current()
