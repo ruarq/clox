@@ -5,46 +5,46 @@ Chunk *current_chunk;
 
 // feels kinda dumb. many of the rules aren't even needed. TODO: write something that avoids those stupid empty rules
 ParseRule rules[] = {
-	[TOKEN_LPAREN]			= {compile_grouping,	NULL,			PREC_NONE	},
-	[TOKEN_RPAREN]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_LBRACE]			= {NULL,				NULL,			PREC_NONE	}, 
-	[TOKEN_RBRACE]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_COMMA]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_DOT]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_MINUS]			= {compile_unary,		compile_binary,	PREC_TERM	},
-	[TOKEN_PLUS]			= {NULL,				compile_binary,	PREC_TERM	},
-	[TOKEN_SEMICOLON]		= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_SLASH]			= {NULL,				compile_binary,	PREC_FACTOR	},
-	[TOKEN_ASTERISK]		= {NULL,				compile_binary,	PREC_FACTOR	},
-	[TOKEN_BANG]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_BANG_EQUAL]		= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_EQUAL]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_EQUAL_EQUAL]		= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_GREATER]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_GREATER_EQUAL]	= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_LESS]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_LESS_EQUAL]		= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_IDENT]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_STRING]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_NUMBER]			= {compile_number,		NULL,			PREC_NONE	},
-	[TOKEN_AND]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_CLASS]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_ELSE]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_FALSE]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_FOR]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_FUN]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_IF]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_NIL]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_OR]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_PRINT]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_RETURN]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_SUPER]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_THIS]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_TRUE]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_VAR]				= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_WHILE]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_ERROR]			= {NULL,				NULL,			PREC_NONE	},
-	[TOKEN_EOF]				= {NULL,				NULL,			PREC_NONE	},
+	[TOKEN_LPAREN]			= { compile_grouping,	NULL,			PREC_NONE	},
+	[TOKEN_RPAREN]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_LBRACE]			= { NULL,				NULL,			PREC_NONE	}, 
+	[TOKEN_RBRACE]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_COMMA]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_DOT]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_MINUS]			= { compile_unary,		compile_binary,	PREC_TERM	},
+	[TOKEN_PLUS]			= { NULL,				compile_binary,	PREC_TERM	},
+	[TOKEN_SEMICOLON]		= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_SLASH]			= { NULL,				compile_binary,	PREC_FACTOR	},
+	[TOKEN_ASTERISK]		= { NULL,				compile_binary,	PREC_FACTOR	},
+	[TOKEN_BANG]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_BANG_EQUAL]		= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_EQUAL]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_EQUAL_EQUAL]		= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_GREATER]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_GREATER_EQUAL]	= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_LESS]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_LESS_EQUAL]		= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_IDENT]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_STRING]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_NUMBER]			= { compile_number,		NULL,			PREC_NONE	},
+	[TOKEN_AND]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_CLASS]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_ELSE]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_FALSE]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_FOR]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_FUN]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_IF]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_NIL]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_OR]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_PRINT]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_RETURN]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_SUPER]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_THIS]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_TRUE]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_VAR]				= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_WHILE]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_ERROR]			= { NULL,				NULL,			PREC_NONE	},
+	[TOKEN_EOF]				= { NULL,				NULL,			PREC_NONE	},
 };
 
 void parse_precedence(const Precedence prec)
@@ -60,7 +60,7 @@ void parse_precedence(const Precedence prec)
 
 	prefix();
 
-	while (prec <= get_rule(parser.previous.type)->prec)
+	while (prec <= get_rule(parser.current.type)->prec)
 	{
 		compiler_advance();
 		ParseFn infix = get_rule(parser.previous.type)->infix;
@@ -83,7 +83,7 @@ bool compile(const char *source, Chunk *chunk)
 
 	compiler_advance();
 	compile_expression();
-	compiler_consume(TOKEN_EOF, "Expected end of expression");
+	compiler_consume(TOKEN_EOF, "Expect end of expression");
 	compiler_finish();
 
 	return !parser.had_error;
@@ -141,7 +141,7 @@ void compile_expression()
 void compile_number()
 {
 	const double value = strtod(parser.previous.start, NULL);
-	const size_t constant = chunk_write_constant(compiler_current_chunk(), value);
+	const size_t constant = chunk_write_constant(compiler_current_chunk(), value_create_number(value));
 	if (constant > UINT8_MAX)
 	{
 		compiler_error("Too many constants in one chunk");
@@ -176,7 +176,7 @@ void compile_binary()
 {
 	const TokenType op = parser.previous.type;
 
-	ParseRule *rule = get_rule(op);
+	const ParseRule *rule = get_rule(op);
 	parse_precedence(rule->prec + 1);
 
 	switch (op)
@@ -203,7 +203,7 @@ void compiler_error_at(const Token *token, const char *error)
 	}
 	parser.panic_mode = true;
 
-	fprintf(stderr, "[line %4ld] Error", token->line);
+	fprintf(stderr, "[line %ld] Error", token->line);
 	
 	if (token->type == TOKEN_EOF)
 	{

@@ -2,7 +2,7 @@
 
 void value_print(const Value value)
 {
-	printf("%g", value);
+	printf("%g", value.as.number);
 }
 
 void value_array_init(ValueArray *va)

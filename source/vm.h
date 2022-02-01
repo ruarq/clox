@@ -1,6 +1,8 @@
 #ifndef CLOX_VM_H
 #define CLOX_VM_H
 
+#include <stdarg.h>
+
 #include "chunk.h"
 #include "compiler.h"
 #include "debug.h"
@@ -32,5 +34,7 @@ InterpretResult vm_run();
 void vm_reset_stack();
 void vm_stack_push(const Value value);
 Value vm_stack_pop();
+
+void vm_runtime_error(const char *fmt, ...);
 
 #endif

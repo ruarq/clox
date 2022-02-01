@@ -7,6 +7,7 @@
 #include "common.h"
 #include "scanner.h"
 #include "chunk.h"
+#include "debug.h"
 
 typedef struct
 {

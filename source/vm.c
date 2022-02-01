@@ -1,5 +1,19 @@
 #include "vm.h"
 
+#define VM_BINARY_OP(vtype, op) \
+	do \
+	{ \
+		if (!value_is_number(vm.stack_top[-1]) || !value_is_number(vm.stack_top[-2])) \
+		{ \
+			vm_runtime_error("Operands must be numbers"); \
+			return INTERPRET_RUNTIME_ERROR; \
+		} \
+		const double b = vm_stack_pop().as.number; \
+		const double a = vm_stack_pop().as.number; \
+		vm_stack_push(vtype(a op b)); \
+	} \
+	while (false)
+
 VM vm;
 
 void vm_init()
@@ -60,28 +74,19 @@ InterpretResult vm_run()
 			}
 			break;
 
-			case OP_ADD:
-				vm_stack_push(vm_stack_pop() + vm_stack_pop());
-				break;
-
-			case OP_SUB:
-				vm_stack_push(-vm_stack_pop() + vm_stack_pop());
-				break;
-
-			case OP_MUL:
-				vm_stack_push(vm_stack_pop() * vm_stack_pop());
-				break;
-
-			case OP_DIV:
-			{
-				const Value b = vm_stack_pop();
-				const Value a = vm_stack_pop();
-				vm_stack_push(a / b);
-			}
-			break;
+			case OP_ADD:	VM_BINARY_OP(value_create_number, +);	break;
+			case OP_SUB:	VM_BINARY_OP(value_create_number, -);	break;
+			case OP_MUL:	VM_BINARY_OP(value_create_number, *);	break;
+			case OP_DIV:	VM_BINARY_OP(value_create_number, /);	break;
 
 			case OP_NEGATE:
-				vm_stack_push(-vm_stack_pop());
+				if (!value_is_number(vm.stack_top[-1]))
+				{
+					vm_runtime_error("Operand must be a number");
+					return INTERPRET_RUNTIME_ERROR;
+				}
+
+				vm_stack_push(value_create_number(-vm_stack_pop().as.number));
 				break;
 
 			case OP_RETURN:
@@ -107,4 +112,19 @@ Value vm_stack_pop()
 {
 	--vm.stack_top;
 	return *vm.stack_top;
+}
+
+void vm_runtime_error(const char *fmt, ...)
+{
+	va_list args;
+	va_start(args, fmt);
+	vfprintf(stderr, fmt, args);
+	va_end(args);
+
+	fputs("\n", stderr);
+
+	const size_t instruction = vm.ip - vm.chunk->code - 1;
+	const size_t line = vm.chunk->lines[instruction];
+	fprintf(stderr, "[line %ld] in script\n", line);
+	vm_reset_stack();
 }

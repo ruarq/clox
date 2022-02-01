@@ -35,7 +35,13 @@ char *read_file(const char *filename)
 	rewind(file);
 
 	char *buf = calloc(file_size + 1, sizeof(char));
-	fread(buf, sizeof(char), file_size, file);
+	const size_t bytes_read = fread(buf, sizeof(char), file_size, file);
+
+	if (bytes_read < file_size)
+	{
+		fprintf(stderr, "Couldn't read file '%s'\n", filename);
+		exit(74);
+	}
 
 	fclose(file);
 	return buf;
