@@ -2,6 +2,7 @@
 #define CLOX_VM_H
 
 #include "chunk.h"
+#include "compiler.h"
 #include "debug.h"
 
 #define VM_STACK_MAX 1 << 8
