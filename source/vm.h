@@ -25,7 +25,7 @@ typedef enum
 void vm_init();
 void vm_free();
 
-InterpretResult vm_interpret(Chunk *chunk);
+InterpretResult vm_interpret(const char *source);
 InterpretResult vm_run();
 
 void vm_reset_stack();

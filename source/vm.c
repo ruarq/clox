@@ -12,12 +12,15 @@ void vm_free()
 
 }
 
-InterpretResult vm_interpret(Chunk *chunk)
+InterpretResult vm_interpret(const char *source)
 {
-	vm.chunk = chunk;
-	vm.ip = chunk->code;
+	// vm.chunk = chunk;
+	// vm.ip = chunk->code;
 
-	return vm_run();
+	// return vm_run();
+
+	compile(source);
+	return INTERPRET_OK;
 }
 
 InterpretResult vm_run()
